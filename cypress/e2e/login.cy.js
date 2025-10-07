@@ -4,7 +4,7 @@ describe('Login spec', () => {
     cy.screenshot('after-visiting-page')
   })
 
-  it.only('Login with valid credentials should allow system entry', () => {
+  it('Login with valid credentials should allow system entry', () => {
     
     cy.get('#username').click().type('julio.lima')
     cy.get('#senha').click().type('123456')
