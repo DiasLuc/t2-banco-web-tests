@@ -1,6 +1,6 @@
 describe('Login spec', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:4000')
+    cy.visit(Cypress.env('URL'))
     cy.screenshot('after-visiting-page')
   })
 
