@@ -5,9 +5,10 @@ describe('Login spec', () => {
   })
 
   it('Login with valid credentials should allow system entry', () => {
-    
-    cy.get('#username').click().type('julio.lima')
-    cy.get('#senha').click().type('123456')
+    cy.fixture('credentials').then(credentials => {
+      cy.get('#username').click().type(credentials.valid.username)
+      cy.get('#senha').click().type(credentials.valid.senha)
+    })
     cy.screenshot('after-filling-valid-credentials')
     // Initial way of getting button
     cy.get('#login-section > .btn').click()
@@ -17,9 +18,11 @@ describe('Login spec', () => {
   })
 
   it('Login with invalid credentials should show error message', () => {
+    cy.fixture('credentials').then(credentials => {
+      cy.get('#username').click().type(credentials.invalid.username)
+      cy.get('#senha').click().type(credentials.invalid.senha)
+    })
     
-    cy.get('#username').click().type('julio.lima')
-    cy.get('#senha').click().type('invalidPass')
 
     // Better way of getting button
     cy.contains('button','Entrar').click()
