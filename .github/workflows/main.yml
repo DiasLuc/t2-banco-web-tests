@@ -1,0 +1,36 @@
+name: E2E Tests
+
+# [Triggers]
+on:
+  workflow_dispatch:
+
+jobs:
+  tests:
+
+    # [OS config]  (windows/linux/mac, chrome/firefox/edge, ...)
+    runs-on: ubuntu-latest
+
+    # [Variables] (environment variables, access keys, etc.)
+    env:
+      API_BASE_URL: 'http://localhost:3000'
+      PORT: 4000
+
+    # [Actions / Steps]
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Installing Dependencies
+        run: npm install
+
+      - name: Start Mock Server
+        run: npm run mock-server &
+        
+      - name: Start Frontend Server
+        run: npm run server &
+
+      - name: Run Tests
+        run: npx cypress run
+      
+        
